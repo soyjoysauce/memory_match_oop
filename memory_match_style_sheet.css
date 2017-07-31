@@ -9,25 +9,34 @@ h1 {
 }
 .game_header {
     display: inline-block;
+    height:200px;
     width: 100vw;
     background-color: #df5277;
     margin-bottom: 5px;
 }
 
+.header_container {
+display: inline-block;
+    width: 1100px;
+    height: 150px;
+    margin-top: 20px;
+}
+
 .game_container{
     height: 750px;
     width:1500px;
-}
-
-div.game_logo {
     display: inline-block;
-    margin-right: 10px;
 }
 
-.game_header > h1 {
+div > .game_logo {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+ h1 {
     display:inline-block;
-    margin: 0px 30px;
     height: 60px;
+
 }
 
 .settings , .about {
@@ -41,37 +50,37 @@ div.game_logo {
 .stats_container {
     border: 2px solid;
     position: relative;
-    display: inherit;
+    display: inline-block;
     height: 750px;
     width: 200px;
     float: left;
     margin-right: 5px;
 }
 
-.label {
+.label > p {
     font-family: Helvetica,sans-serif;
     font-size: 20px;
     text-align: center;
+    color: black;
+    display: inline-block;
 }
 
-.reset {
-    width:90px;
+button > .reset {
+    width:100px;
     height:50px;
     margin:0 auto;
+    left:0;
+    top:0;
+
 
 }
+
 .games_played, .attempts, .accuracy {
     border: 1px solid;
     padding: 0px;
     position: relative;
     height: 30%;
-    background-color: white;
-    opacity: .9;
-}
-
-div.column{
-    position: relative;
-    display:inline-block;
+    background-color: cornsilk;
 }
 
 div.card {
@@ -80,6 +89,9 @@ div.card {
     border: 2px solid;
     position: relative;
     display:inline-block;
+}
+div .column {
+    display: inline-block;
 }
 
 .card > div > img {
@@ -94,5 +106,11 @@ div.card {
     top:0;
     height: 100%;
     width: 100%;
-    opacity: .9;
+    /*for if you want to feel like a psychic*/
+    /*opacity: .7;*/
+    background-color: rgba(249,236,224,1);
+}
+
+.flipped {
+    visibility: hidden;
 }

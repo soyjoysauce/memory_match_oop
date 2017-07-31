@@ -5,17 +5,21 @@
     <title>memory_match_Soyoung_Bae</title>
     <link rel="stylesheet" type="text/css" href="memory_match_style_sheet.css">
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="http://learning-fuze.github.io/memory_match/v0.1/script.js"></script>
+    <script src="memory_match.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <header class = "game_header">
-        <div class="game_logo"><img src="image/Tubbs_Sprite.png"/></div>
+    <div class ="header_container">
+    <div class="game_logo"><img src="image/Tubbs_Sprite.png"/></div>
         <div class="game_logo"><img src="image/Frisky_bitz.png"/></div>
 
         <h1>feed the fat cat</h1>
 
         <p class = "settings"><a href="">settings</a></p>
-        <p class = "about"><a href ="">about</a></p>
+        <p class = "about"><a href ="about.html">about</a></p>
 
         <div class=" game_logo"><img src="image/Saint_Purrtrick_Sprite.png"/></div>
         <div class="game_logo"><img src="image/Conductor_Whiskers_Sprite.png" /></div>
@@ -23,85 +27,101 @@
         <div class="game_logo"><img src="image/Bonito_bitz.png"/></div>
         <div class="game_logo"><img src="image/Deluxe_Tuna_bitz.png"/></div>
         <div class="game_logo"><img src="image/Sashimi.png"/></div>
-
-    </header>
-<div class = "game_container">
-    <!--stats column-->
-    <div class = "stats_container">
-        <div class = "games_played">
-            <div class = "label">games played</div>
-            <div class = "value"></div>
-        </div>
-        <div class = "attempts">
-            <div class= "label">attempts</div>
-            <div class="value"></div>
-        </div>
-        <div class = "accuracy">
-            <div class = "label">accuracy</div>
-            <div class = "value"></div>
-        </div>
-        <button class="reset">reset game<br>foolish human</button>
     </div>
-
-    <!--column1-->
-        <div class = "column">
-            <div class="card">
-                <div class=" front">
-                    <img src="image/Sapphire_Sprite.png" />
-                </div>
-                    <div class=" back">
-                        <img src="image/nekobutt.jpg"/>
-                    </div>
+    </header>
+    <div class = "game_container">
+        <!--stats column-->
+        <div class = "stats_container">
+            <div class = "games_played">
+                <div class = "label"><p>games played</p></div>
+                <div class = "value"></div>
             </div>
-            <div class="card">
-                <div class="front">
-                    <img src="image/Jeeves_Sprite.png"/>
-                </div>
-                    <div class="back">
-                        <img src="image/nekobutt.jpg"/>
-                    </div>
+            <div class = "attempts">
+                <div class= "label"><p>attempts</p></div>
+                <div class="value"></div>
             </div>
-            <div class="card">
-                <div class="front">
-                    <img src="image/Senor_don_gato_Sprite.png"/>
-                </div>
-                    <div class="back">
-                        <img src="image/nekobutt.jpg"/>
-                    </div>
+            <div class = "accuracy">
+                <div class = "label"><p>accuracy</p></div>
+                <div class = "value"></div>
             </div>
+            <button class="reset">reset game<br>foolish human</button>
         </div>
-    <!--column2-->
-            <div class="column">
+
+        <!--column1-->
                 <div class="card">
-                    <div class="front">
-                        <img src="image/Sprite_Joe_DiMeowgio.png"/>
+                    <div class="front" id="0">
+                        <img src="image/Sapphire_Sprite.png"/>
+                    </div>
+                        <div class=" back">
+                            <img src="image/nekobutt.jpg"/>
+                        </div>
+                </div>
+
+                <div class="card" >
+                    <div class="front" id="1">
+                        <img src="image/Jeeves_Sprite.png"/>
                     </div>
                         <div class="back">
                             <img src="image/nekobutt.jpg"/>
                         </div>
                 </div>
-                <div class="card">
-                    <div class="front">
-                        <img src="image/Whiteshadow_Sprite.png"/>
-                    </div>
-                    <div class="back">
-                        <img src="image/nekobutt.jpg"/>
-                    </div>
-                </div>
 
                 <div class="card">
-                    <div class="front">
-                        <img src="image/SassyFran_Sprite.png"/>
+                    <div class="front" id="2">
+                        <img src="image/Sapphire_Sprite.png"/>
                     </div>
-                    <div class="back">
-                        <img src="image/nekobutt.jpg"/>
-                    </div>
+                        <div class="back">
+                            <img src="image/nekobutt.jpg"/>
+                        </div>
                 </div>
-            </div>
-    <!--column3-->
-                <div class="column">
+
                     <div class="card">
-                        <div class="front">
+                        <div class="front" id="3">
+                            <img src="image/Jeeves_Sprite.png"/>
+                        </div>
+                            <div class="back">
+                                <img src="image/nekobutt.jpg"/>
+                            </div>
+                    </div>
+        <!--column2-->
+                    <div class="card">
+                        <div class="front" id="4">
+                            <img src="image/Whiteshadow_Sprite.png"/>
+                        </div>
+                        <div class="back">
+                            <img src="image/nekobutt.jpg"/>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="front" id="5">
+                            <img src="image/SassyFran_Sprite.png"/>
+                        </div>
+                        <div class="back">
+                            <img src="image/nekobutt.jpg"/>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="front" id="6">
+                            <img src="image/Whiteshadow_Sprite.png"/>
+                        </div>
+                        <div class="back">
+                            <img src="image/nekobutt.jpg"/>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="front" id="7">
+                            <img src="image/SassyFran_Sprite.png"/>
+                        </div>
+                        <div class="back">
+                            <img src="image/nekobutt.jpg"/>
+                        </div>
+                    </div>
+        <!--column3-->
+                    <div class="card">
+                        <div class="front" id="8">
                             <img src="image/Guy_Furry_Sprite.png"/>
                         </div>
                         <div class="back">
@@ -109,7 +129,7 @@
                         </div>
                     </div>
                     <div class="card">
-                        <div class="front">
+                        <div class="front" id="9">
                             <img src="image/Kathmandu_Sprite.png"/>
                         </div>
                         <div class="back">
@@ -117,97 +137,93 @@
                         </div>
                     </div>
                     <div class="card">
-                        <div class="front">
+                        <div class="front" id="10">
+                            <img src="image/Guy_Furry_Sprite.png"/>
+                        </div>
+                        <div class="back">
+                            <img src="image/nekobutt.jpg"/>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="front" id="11">
+                            <img src="image/Kathmandu_Sprite.png"/>
+                        </div>
+                        <div class="back">
+                            <img src="image/nekobutt.jpg"/>
+                        </div>
+                    </div>
+        <!--column 4-->
+                    <div class="card">
+                        <div class="front" id="12">
+                            <img src="image/Senor_don_gato_Sprite.png"/>
+                        </div>
+                        <div class="back">
+                            <img src="image/nekobutt.jpg"/>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="front" id="13">
                             <img src="image/Bengal_Jack_Sprite.png"/>
                         </div>
                         <div class="back">
                             <img src="image/nekobutt.jpg"/>
                         </div>
                     </div>
-                </div>
-        <!--column4-->
-        <div class="column">
-            <div class="card">
-                <div class=" front">
-                    <img src="image/Sapphire_Sprite.png" />
-                </div>
-                <div class=" back">
-                    <img src="image/nekobutt.jpg"/>
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img src="image/Jeeves_Sprite.png"/>
-                </div>
-                <div class="back">
-                    <img src="image/nekobutt.jpg"/>
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img src="image/Senor_don_gato_Sprite.png"/>
-                </div>
-                <div class="back">
-                    <img src="image/nekobutt.jpg"/>
-                </div>
-            </div>
-        </div>
+                    <div class="card">
+                        <div class="front" id="14">
+                            <img src="image/Senor_don_gato_Sprite.png"/>
+                        </div>
+                        <div class="back">
+                            <img src="image/nekobutt.jpg"/>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="front" id="15">
+                            <img src="image/Bengal_Jack_Sprite.png"/>
+                        </div>
+                        <div class="back">
+                            <img src="image/nekobutt.jpg"/>
+                        </div>
+                    </div>
         <!--column5-->
-        <div class="column">
-            <div class="card">
-                <div class="front">
-                    <img src="image/Sprite_Joe_DiMeowgio.png"/>
-                </div>
-                <div class="back">
-                    <img src="image/nekobutt.jpg"/>
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img src="image/Whiteshadow_Sprite.png"/>
-                </div>
-                <div class="back">
-                    <img src="image/nekobutt.jpg"/>
+                    <div class="card">
+                        <div class="front" id="16">
+                            <img src="image/Sprite_Joe_DiMeowgio.png"/>
+                        </div>
+                        <div class="back">
+                            <img src="image/nekobutt.jpg"/>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="front" id="17">
+                            <img src="image/Sprite_Joe_DiMeowgio.png"/>
+                        </div>
+                        <div class="back">
+                            <img src="image/nekobutt.jpg"/>
+                        </div>
+                    </div>
+    </div>
+    </div>
+<!--The modal box-->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Congratulations</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>You have won!.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="card">
-                <div class="front">
-                    <img src="image/SassyFran_Sprite.png"/>
-                </div>
-                <div class="back">
-                    <img src="image/nekobutt.jpg"/>
-                </div>
-            </div>
-        </div>
-        <!--column6-->
-        <div class="column">
-            <div class="card">
-                <div class="front">
-                    <img src="image/Guy_Furry_Sprite.png"/>
-                </div>
-                <div class="back">
-                    <img src="image/nekobutt.jpg"/>
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img src="image/Kathmandu_Sprite.png"/>
-                </div>
-                <div class="back">
-                    <img src="image/nekobutt.jpg"/>
-                </div>
-            </div>
-            <div class="card">
-                <div class="front">
-                    <img src="image/Bengal_Jack_Sprite.png"/>
-                </div>
-                <div class="back">
-                    <img src="image/nekobutt.jpg"/>
-                </div>
-            </div>
-        </div>
-</div>
 </body>
-<script src="memory_match.js"></script>
 </html>
