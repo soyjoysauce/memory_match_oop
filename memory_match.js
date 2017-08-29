@@ -22,53 +22,62 @@ var first_card_element = null;
 var second_card_element = null;
 var total_possible_matches = 9;
 var match_counter = 0;
+var cards_can_be_clicked = true;
 
 
 //this is what happens when a card is clicked
 
 
 //declare card_clicked function
+
+
     function card_clicked() {
-        $(this).find(nekobutt).addClass('flipped');
+
+        if (cards_can_be_clicked === true) {
+            $(this).find(nekobutt).addClass('flipped');
 
 //check if variable first_card_clicked is null
 // checks and the first card clicked, draws the images source and checks null status
-        if (first_card_clicked === null) {
-            first_card_clicked = $(this).find('.front > img').attr('src');
-            first_card_element = this;
-        }
-        else {
-            second_card_clicked = $(this).find('.front >img').attr('src');
-            second_card_element = this;
-            //if first card and second card is matching, increment counter and return null.
-            if (first_card_clicked === second_card_clicked){
-                match_counter++;
-                attempts++;
-                display_stats();
-                first_card_clicked = null;
-                second_card_clicked = null;
-                //if match counter is equal to possible matches reveal modal.
-                if(match_counter === total_possible_matches){
-                    $('#myModal').modal('show');
-                }
+            if (first_card_clicked === null) {
+                first_card_clicked = $(this).find('.front > img').attr('src');
+                first_card_element = this;
             }
+            else {
+                cards_can_be_clicked = false;
+                second_card_clicked = $(this).find('.front >img').attr('src');
+                second_card_element = this;
 
-            //if first card and second card is not matched flip it back.
-            else{
-                setTimeout(function()
-                {
-                    $(first_card_element).find('.back').removeClass('flipped');
-                    $(second_card_element).find('.back').removeClass('flipped');
-                    first_card_clicked = null;
-                    second_card_clicked = null;
+                //if first card and second card is matching, increment counter and return null.
+                if (first_card_clicked === second_card_clicked) {
+                    match_counter++;
                     attempts++;
                     display_stats();
-                }, 2000);
+                    first_card_clicked = null;
+                    second_card_clicked = null;
+
+                    //if match counter is equal to possible matches reveal modal.
+                    if (match_counter === total_possible_matches) {
+                        $('#myModal').modal('show');
+                    }
+
+                }
+
+                //if first card and second card is not matched flip it back.
+                else {
+                    setTimeout(function () {
+                        $(first_card_element).find('.back').removeClass('flipped');
+                        $(second_card_element).find('.back').removeClass('flipped');
+                        first_card_clicked = null;
+                        second_card_clicked = null;
+                        attempts++;
+                        display_stats();
+                        cards_can_be_clicked = true;
+                    }, 2000);
+                }
 
             }
 
         }
-
     }
 
 //memory match 1.0
