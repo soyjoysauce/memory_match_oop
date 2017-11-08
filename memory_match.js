@@ -54,6 +54,8 @@ var cards_can_be_clicked = true;
                     display_stats();
                     first_card_clicked = null;
                     second_card_clicked = null;
+                    cards_can_be_clicked = true;
+
 
                     //if match counter is equal to possible matches reveal modal.
                     if (match_counter === total_possible_matches) {
