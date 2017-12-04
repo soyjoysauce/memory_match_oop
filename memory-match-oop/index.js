@@ -2,7 +2,7 @@
 $(document).ready(function(){
     $(this.memory_Match).bind(this);
     console.log('memory made');
-    
+    let memory_Match = new memoryMatch();    
 });
 
 class memoryMatch {
@@ -22,29 +22,26 @@ class memoryMatch {
     createCard(){
         let image_Array = this.imageArray;
         let doubled_Array = [];
-        let randomized_Cards = [];
         let counter = 0;
-        image_Array.map(function(img){ doubled_Array.push(img); doubled_Array.push(img);console.log('doubled_Array1',doubled_Array)});
-        console.log('doubled_Array2',doubled_Array);            
-        
-        doubled_Array.map(function(){
-            let randomNum = Math.floor(Math.random() * doubled_Array.length);                                                     
+        image_Array.map(function(img){ doubled_Array.push(img); doubled_Array.push(img); });
+        let doubled_Cards = doubled_Array;
+        let randomized_Cards = [];        
+        doubled_Cards.map(function(){
+            let randomNum = Math.floor(Math.random() * doubled_Cards.length);                                                     
             let item = {
                 'id': counter,
-                'card': doubled_Array[randomNum],
+                'card': doubled_Cards[randomNum],
                 'info': $('<div>',{
                     id : counter,
-                    card : doubled_Array[randomNum],
+                    card : doubled_Cards[randomNum],
                 })
             };
-            $('.card_img_container').append(item.info.clone());
             randomized_Cards.push(item);            
+            $(".card_img_container").append(item.info.clone());
             counter ++ ;
-            console.log('item',item);
-            console.log('doubled_Array3',doubled_Array)            
+            // console.log('item',item);
+            console.log('randomized_Cards',randomized_Cards);            
         })
     }
-
 }
 
-let memory_Match = new memoryMatch();
