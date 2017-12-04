@@ -1,0 +1,57 @@
+/*  written by soyjoysauce on Dec 3 2017 */
+body {
+    text-align: center;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+  }
+
+
+div.card_img_container {
+    width: 100vw;
+    height: 700px;
+    border: 1px solid black;
+};
+
+div.card_img_container > div[item] {
+    background-size: contain;
+    display: inline-block;
+    width: 11.5%;
+    height: 12.5%;
+    background-repeat: no-repeat;
+  }
+  
+  div[item="sapphire_Sprite"] {
+    background-image: url("image/Sapphire_Sprite.png");
+  }
+  
+  div[item="jeeves_Sprite"] {
+    background-image: url("image/Jeeves_Sprite.png");
+  }
+  
+  div[item="whiteshadow_Sprite"] {
+    background-image: url("image/Whiteshadow_Sprite.png");
+  }
+  div[item="sassyFran_Sprite"] {
+    background-image: url("image/SassyFran_Sprite.png");
+  }
+  
+  div[item="guy_Furry_Sprite"] {
+    background-image: url("image/Guy_Furry_Sprite.png");
+  }
+  
+  div[item="kathmandu_Sprite"] {
+    background-image: url("image/Kathmandu_Sprite.png");
+  }
+  
+  div[item="senor_don_gato_Sprite"] {
+    background: url("image/Senor_don_gato_Sprite.png");
+  }
+  
+  div[item="bengal_Jack_Sprite"] {
+    background: url("image/Bengal_Jack_Sprite.png");
+  }
+
+  div[item="sprite_Joe_DiMeowgio"] {
+    background: url("image/Sprite_Joe_DiMeowgio.png");
+  }
