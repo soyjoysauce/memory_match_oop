@@ -7,6 +7,10 @@ $(document).ready(function() {
 
 class memoryMatch {
   constructor() {
+    this.game_moves = {
+      first_card_clicked: null,
+      second_card_clicked: null
+    };
     this.cardArray = [];
     this.imageArray = [
       "sapphire_Sprite",
@@ -23,10 +27,9 @@ class memoryMatch {
     this.clickHandlers();
   }
 
-  clickHandlers(){
-    $(".card_img_container").on('click','div',this.card_clicked.bind(this));
+  clickHandlers() {
+    $(".card_img_container").on("click", "div", this.card_clicked.bind(this));
   }
-  
 
   createCard() {
     let image_Array = this.imageArray;
@@ -38,9 +41,11 @@ class memoryMatch {
       let item = {
         id: counter,
         card: img,
+        class: img,
         info: $("<div>", {
           id: counter,
-          card: img
+          card: img,
+          class: img
         })
       };
       matched_Cards.push(item);
@@ -48,32 +53,34 @@ class memoryMatch {
       let item2 = {
         id: counter,
         card: img,
+        class: img,
         info: $("<div>", {
           id: counter,
-          card: img
+          card: img,
+          class: img
         })
       };
       matched_Cards.push(item2);
       counter++;
       console.log("matched_Cards", matched_Cards);
     });
-    function randomize_list(array){
-        let m = array.length,
-          t,
-          i;
-        //fisher-yates shuffle
-        // While there are elements yet to be shuffled
-        while (m) {
-          // Pick a remaining element
-          let i = Math.floor(Math.random() * m--);
-          // And swap it with the current element.
-          t = array[m];
-          array[m] = array[i];
-          array[i] = t;
-        }
-        console.log("array", array);
-        return array;
+    function randomize_list(array) {
+      let m = array.length,
+        t,
+        i;
+      //fisher-yates shuffle
+      // While there are elements yet to be shuffled
+      while (m) {
+        // Pick a remaining element
+        let i = Math.floor(Math.random() * m--);
+        // And swap it with the current element.
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
       }
+      console.log("array", array);
+      return array;
+    }
     let randomized_Cards = randomize_list(matched_Cards);
     console.log("randomized_Cards", randomized_Cards);
     randomized_Cards.forEach(function(item) {
@@ -82,25 +89,38 @@ class memoryMatch {
   }
 
   card_clicked() {
-    let user_input = event.target.card.outerHTML;
-    console.log('this.user_input',user_input)
-    //variables for functions (to track matches)
+    let user_input = event.target.className;
+    let gameMoves = this.game_moves;
+    console.log("user_input", user_input);
     let cards_can_be_clicked = true;
-    
-    let first_card_clicked = null;
-    let second_card_clicked = null;
-    
+
     let total_possible_matches = 9;
     let match_counter = 0;
 
-    second_card_clicked === null && first_card_clicked === null ? first_card_clicked = user_input  : 'cards are locked';
-    
-    first_card_clicked !== null && second_card_clicked === null ? second_card_clicked = user_input  : 'cards are false';    
-    cards_can_be_clicked === true && first_card_clicked !== null ? cards_can_be_clicked = false  : 'cards are locked';
-    console.log('first_card_clicked', first_card_clicked);
-    console.log('second_card_clicked', second_card_clicked);
-    first_card_clicked === second_card_clicked ? match_counter++ : first_card_clicked === null && second_card_clicked === null;
+    if (gameMoves.first_card_clicked === null) {
+      console.log("user_input", user_input);
+      gameMoves["first_card_clicked"] = user_input;
+      console.log("gameMoves.first_card_clicked", gameMoves.first_card_clicked);
 
-    // console.log('match_counter',match_counter)
+      if (
+        gameMoves.second_card_clicked === null &&
+        gameMoves.first_card_clicked === null
+      ) {
+        console.log("user_input", user_input);
+        gameMoves["second_card_clicked"] = user_input;
+        console.log(
+          "gameMoves.second_card_clicked",
+          gameMoves.second_card_clicked
+        );
+
+        if (gameMoves.second_card_clicked === gameMoves.first_card_clicked) {
+          console.log("match_counter", match_counter);
+          match_counter++;
+          gameMoves.first_card_clicked === null &&
+            gameMoves.second_card_clicked === null;
+          return;
+        }
+      }
+    }
   }
 }
