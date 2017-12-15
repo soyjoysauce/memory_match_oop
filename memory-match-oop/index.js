@@ -6,7 +6,15 @@ $(document).ready(function() {
 });
 
 class memoryMatch {
+
   constructor() {
+    this.game_stats = {
+      match_counter: 0,
+      total_possible_matches: 9,
+      attempt: 0,
+      accuracy : 0,
+      games_played : 0
+    }    
     this.game_moves = {
       first_card_clicked: null,
       second_card_clicked: null
@@ -27,7 +35,7 @@ class memoryMatch {
     this.clickHandlers();
   }
 
-  clickHandlers() {
+  clickHandlers() {    
     $(".card_img_container").on("click", "div", this.card_clicked.bind(this));
   }
 
@@ -40,11 +48,11 @@ class memoryMatch {
       let randomNum = Math.floor(Math.random() * image_Array.length);
       let item = {
         id: counter,
-        card: img,
+        card:img,
         class: img,
         info: $("<div>", {
           id: counter,
-          card: img,
+          card:img,          
           class: img
         })
       };
@@ -52,11 +60,11 @@ class memoryMatch {
       counter++;
       let item2 = {
         id: counter,
-        card: img,
+        card:img,        
         class: img,
         info: $("<div>", {
           id: counter,
-          card: img,
+          card:img,          
           class: img
         })
       };
@@ -64,6 +72,7 @@ class memoryMatch {
       counter++;
       console.log("matched_Cards", matched_Cards);
     });
+
     function randomize_list(array) {
       let m = array.length,
         t,
@@ -88,39 +97,68 @@ class memoryMatch {
     });
   }
 
-  card_clicked() {
-    let user_input = event.target.className;
-    let gameMoves = this.game_moves;
-    console.log("user_input", user_input);
-    let cards_can_be_clicked = true;
+  display_stats() {
+    let gameAttempt = this.game_stats['attempt'];
+    let gameAccuracy = this.game_stats['accuracy'];
+    let gamesPlayed = this.game_stats['games_played'];
+    $(".games_played .value").text(games_played);
+    $(".attempts .value").text(attempts);
+    var accur_percent = Math.floor(match_counter / attempts * 100) + "%";
+    $(".accuracy .value").text(accur_percent);
+  };
 
-    let total_possible_matches = 9;
-    let match_counter = 0;
+  card_clicked() {
+    let gameMatch = this.game_stats['match_counter'];
+    let gameMaxMatch = this.game_stats['total_possible_matches'];        
+    let gameMoves = this.game_moves;
+    let cards_can_be_clicked = true;
+    let user_input = event.target.className;
+    console.log("user_input", user_input);
 
     if (gameMoves.first_card_clicked === null) {
-      console.log("user_input", user_input);
-      gameMoves["first_card_clicked"] = user_input;
+      console.log("user_input", user_input);      
+      gameMoves['first_card_clicked'] = user_input;
       console.log("gameMoves.first_card_clicked", gameMoves.first_card_clicked);
-
-      if (
-        gameMoves.second_card_clicked === null &&
-        gameMoves.first_card_clicked === null
-      ) {
-        console.log("user_input", user_input);
-        gameMoves["second_card_clicked"] = user_input;
-        console.log(
-          "gameMoves.second_card_clicked",
-          gameMoves.second_card_clicked
-        );
-
-        if (gameMoves.second_card_clicked === gameMoves.first_card_clicked) {
-          console.log("match_counter", match_counter);
-          match_counter++;
-          gameMoves.first_card_clicked === null &&
-            gameMoves.second_card_clicked === null;
-          return;
-        }
+    }
+    else {
+      gameMoves.second_card_clicked = user_input; 
+      console.log("user_input", user_input);            
+      gameMoves['second_card_clicked'] = user_input;
+      console.log("gameMoves.second_card_clicked", gameMoves.second_card_clicked);      
+      
+      if (gameMoves.second_card_clicked === gameMoves.first_card_clicked) {
+        console.log("gameMatch", gameMatch);
+        gameMatch ++;
+        console.log("gameMatch", gameMatch);        
+        gameMoves.first_card_clicked = null; 
+        gameMoves.second_card_clicked = null;
+        gameMatch === gameMaxMatch ? 'you won!':'keep going';
+      }
+      else{
+        console.log('there was no match return state');
+        gameMoves.first_card_clicked = null; 
+        gameMoves.second_card_clicked =  null;
+        console.log(gameMoves.first_card_clicked,gameMoves.second_card_clicked);
       }
     }
   }
+  
+  
+  
+  handleResetClick() {
+    console.log("reset clicked");
+    $(".card")
+      .find(".back")
+      .removeClass("flipped");
+    games_played++;
+    display_stats();
+    reset_stats();
+    stackShuffle();
+  };
+
+  reset_stats() {
+    accuracy = 0;
+    match_counter = 0;
+    attempts = 0;
+  };
 }
