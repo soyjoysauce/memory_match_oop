@@ -1,80 +1,134 @@
 /*  written by soyjoysauce on Dec 3 2017 */
-  body {
-    /* background-position: center; */
-    text-align: center;
-    position: fixed;
-    background-size: cover;
-    height: 100vh;
-    width: 100vw;
-  }
+body {
+  /* background-position: center; */
+  text-align: center;
+  position: fixed;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
 
-  .container {
-    display: inline-grid;
-    grid-template-columns: 40px 50px auto 50px 40px;
-    grid-template-rows: 25% 100px auto;
-  }
+  background-image: url("image/Zen_style.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: Helvetica, sans-serif;
+}
 
-  h3 {
-    width: 40%;
-    height:20px;
-    display: inline-block;
-    text-align: center;
-  }
+.container {
+  display: inline-block;
+  /* grid-template-columns: 40px 50px auto 50px 40px;
+  grid-template-rows: 25% 100px auto; */
+}
 
-  #game_stats { 
-    border: 1px solid;
-    width: 100%;
-    height: 10%;
-  }
+h3 {
+  width: 40%;
+  height: 20px;
+  display: inline-block;
+  text-align: center;
+}
 
-  div.card_img_container {
-    width: 100%;
-    height: 80%;
-    border: 1px solid black;
-  }
+#game_stats {
+  border: 1px solid;
+  width: 100%;
+  height: 10%;
+}
 
-  div[card="sapphire_Sprite"] {
-    background-image: url("image/Sapphire_Sprite.png");
-  }
-  
-  div[card="jeeves_Sprite"] {
-    background-image: url("image/Jeeves_Sprite.png");
-  }
-  
-  div[card="whiteshadow_Sprite"] {
-    background-image: url("image/Whiteshadow_Sprite.png");
-  }
-  div[card="sassyFran_Sprite"] {
-    background-image: url("image/SassyFran_Sprite.png");
-  }
-  
-  div[card="guy_Furry_Sprite"] {
-    background-image: url("image/Guy_Furry_Sprite.png");
-  }
-  
-  div[card="kathmandu_Sprite"] {
-    background-image: url("image/Kathmandu_Sprite.png");
-  }
-  
-  div[card="senor_don_gato_Sprite"] {
-    background-image: url("image/Senor_don_gato_Sprite.png");
-  }
-  
-  div[card="bengal_Jack_Sprite"] {
-    background-image: url("image/Bengal_Jack_Sprite.png");
-  }
+div.card_img_container {
+  width: 85vw;
+  margin: 0%;
+  height: 90vh;
+  border: 1px solid black;
+}
 
-  div[card="sprite_Joe_DiMeowgio"] {
-    background-image: url("image/Sprite_Joe_DiMeowgio.png");
-  }
+div[card="sapphire_Sprite"] {
+  background-image: url("image/Sapphire_Sprite.png");
+}
 
-  div.card_img_container > div {
-    background-size: contain;
-    background-position: center;
-    border: 1px solid black;
-    display: inline-block;
-    width: 20%;
-    height: 25%;
-    background-repeat: no-repeat;
-    text-align: center;
-  }
+div[card="jeeves_Sprite"] {
+  background-image: url("image/Jeeves_Sprite.png");
+}
+
+div[card="whiteshadow_Sprite"] {
+  background-image: url("image/Whiteshadow_Sprite.png");
+}
+div[card="sassyFran_Sprite"] {
+  background-image: url("image/SassyFran_Sprite.png");
+}
+
+div[card="guy_Furry_Sprite"] {
+  background-image: url("image/Guy_Furry_Sprite.png");
+}
+
+div[card="kathmandu_Sprite"] {
+  background-image: url("image/Kathmandu_Sprite.png");
+}
+
+div[card="senor_don_gato_Sprite"] {
+  background-image: url("image/Senor_don_gato_Sprite.png");
+}
+
+div[card="bengal_Jack_Sprite"] {
+  background-image: url("image/Bengal_Jack_Sprite.png");
+}
+
+div[card="sprite_Joe_DiMeowgio"] {
+  background-image: url("image/Sprite_Joe_DiMeowgio.png");
+}
+
+div.card_img_container > div {
+  background-size: contain;
+  background-position: center;
+  border: 1px solid black;
+  display: inline-block;
+  width: 20%;
+  height: 25%;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+
+button > .reset {
+  width: 300px;
+  height: 200px;
+  margin: 0 auto;
+  left: 0;
+  top: 0;
+}
+
+#cardStack {
+  position: relative;
+  width: 16%;
+  height: 16%;
+}
+
+div[card="neckob"] {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  opacity: 1.0;
+  top: 0%;
+  float: left;
+  background-image: url("image/nekob.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(249, 236, 224, 1);
+  background-size: contain;
+  border: green 1px solid;
+}
+
+#front {
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-color: rgba(249, 236, 224, 1);
+  background-size: contain;
+  /* opacity: 0.5; */
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.flipped {
+  visibility: hidden;
+}
