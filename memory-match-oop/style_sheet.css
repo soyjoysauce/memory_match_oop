@@ -93,17 +93,17 @@ button > .reset {
   top: 0;
 }
 
-#cardStack {
+.cardStack {
   position: relative;
   width: 16%;
   height: 16%;
 }
 
-div[card="neckob"] {
+div[card="nekob"] {
   height: 100%;
   width: 100%;
   position: relative;
-  opacity: 1.0;
+  opacity: 0.8;
   top: 0%;
   float: left;
   background-image: url("image/nekob.jpg");
