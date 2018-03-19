@@ -34,7 +34,6 @@ class memoryMatch {
     ];
     this.createCard();
     this.clickHandlers();
-    // this.atsume = ".card";
   }
 
   clickHandlers() {
@@ -103,9 +102,9 @@ class memoryMatch {
             : console.log("keep going");
         } else {
           //if the card does NOT MATCH flip back
-          doWork(callback) {
-            setTimeout(() => callback(this.name), 15); 
-        };
+        //   doWork(callback) {
+        //     setTimeout(() => callback(this.name), 15); 
+        // };
 
         //instead of async setTimeout establish promize object that will represent 
         //eventual asynch operations. resulting in a value. 
