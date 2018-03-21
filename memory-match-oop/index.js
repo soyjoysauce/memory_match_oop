@@ -17,8 +17,8 @@ class memoryMatch {
     this.game_moves = {
       first_card_clicked: null,
       second_card_clicked: null,
-      first_card_element:null,
-      second_card_element:null
+      first_card_element: null,
+      second_card_element: null
     };
     this.cardArray = [];
     this.imageArray = [
@@ -34,7 +34,7 @@ class memoryMatch {
     ];
     this.createCard();
     this.clickHandlers();
-    this.atsume = ".card";
+    // this.atsume = ".card";
   }
 
   clickHandlers() {
@@ -46,88 +46,108 @@ class memoryMatch {
   }
 
   card_clicked(event) {
-    let cardClicked = $(event.currentTarget);
-
     let gameMoves = this.game_moves;
+    let cardClicked = $(event.currentTarget);
+    gameMoves.first_card_element = cardClicked;
+    console.log("cardClicked", gameMoves.first_card_element);
+    let cards_can_be_clicked = true;
+
     //this one accesses the image inside the cardStack div.
     let card_user_front = $(cardClicked)
       .find("#front")
       .attr("card");
-      gameMoves.first_card_element = cardClicked
-    console.log("card_user_front", card_user_front);
+    console.log("card_user_front:", card_user_front);
 
-    let cards_can_be_clicked = true;
+    //this one accesses the back image inside the cardStack div.
+    let card_user_back = $(cardClicked)
+      .find("#neckob")
+      .attr("card");
+    console.log("card_user_back:", card_user_back);
+
     //this one is access to the back of the card -> nekob
-    let user_input = event.target;
-    console.log("user_input", user_input);
-
+    const user_input = event.target;
+    console.log("user_input:", user_input);
+    
+    //class name of the card
     let user_input_class = event.target.className;
-    console.log("user_input_class", user_input_class);
+    console.log("user_input_class:", user_input_class);
 
-    let user_neckoB = $("div#nekob");
-    console.log("user_neckoB", user_neckoB);
-
-    let user_cardStack = $(user_input).attr("nekob");
-    console.log("user_cardStack", user_cardStack);
-    // let cardClicked = $("div#front");
-    console.log("cardClicked", cardClicked);
-    // let user_cardClicked = event.target.find(this.cardClicked);
-    // console.log('user_cardClicked', user_cardClicked);
-
-    if (cards_can_be_clicked === true && user_input_class === "nekob") {
+    if (
+      cards_can_be_clicked === true &&
+      user_input.className === card_user_back
+    ) {
+      //assures only the back will be flipped
       $(user_input).addClass("flipped");
       console.log("flipped");
-      if (
-        gameMoves.first_card_clicked === null &&
-        gameMoves.second_card_clicked === null
-      ) {
-        gameMoves.first_card_clicked = card_user_front;
-        console.log("1card_user_front", card_user_front);
+      //assign first click
+      if (gameMoves.first_card_clicked === null) {
+        let first_card = card_user_front;
+        gameMoves.first_card_clicked = first_card;
+        console.log("1 card_user_front:", first_card);
         console.log(
-          "gameMoves.first_card_clicked",
+          "gameMoves.first_card_clicked:",
           gameMoves.first_card_clicked
         );
-      } else if (
-        gameMoves.first_card_clicked !== null &&
-        gameMoves.second_card_clicked === null
-      ) {
+      } else if (gameMoves.first_card_clicked !== null) {
+        //assign second click
+        cards_can_be_clicked = false;
         gameMoves.second_card_clicked = card_user_front;
-        console.log("2card_user_front", card_user_front);
+        console.log("2card_user_front:", card_user_front);
+        gameMoves.second_card_element = cardClicked;
+
         // gameMoves["second_card_clicked"] = this.user_input;
         console.log(
-          "gameMoves.second_card_clicked",
+          "gameMoves.second_card_clicked:",
           gameMoves.second_card_clicked
         );
-
+        //if first move matches second move
         if (gameMoves.second_card_clicked === gameMoves.first_card_clicked) {
+          cards_can_be_clicked = true;
+          gameMoves.first_card_clicked = null;
+          gameMoves.second_card_clicked = null;
           let matchCounter = this.game_stats["match_counter"];
           matchCounter++;
           this.game_stats["match_counter"] = matchCounter;
           console.log("a match was made - matchCounter:", matchCounter);
-
-          gameMoves.first_card_clicked = null;
-          gameMoves.second_card_clicked = null;
-          
-          $(user_input).removeClass("flipped");
-          console.log("remove - flipped");
-
           let gameMaxMatch = this.game_stats["total_possible_matches"];
-          console.log("gameMaxMatch", gameMaxMatch);
-
+          console.log("gameMaxMatch:", gameMaxMatch);
           this.game_stats["total_possible_matches"] = gameMaxMatch;
-          matchCounter === gameMaxMatch ? "you won!" : "keep going";
+          matchCounter === gameMaxMatch
+            ? console.log("you won!")
+            : console.log("keep going");
         } else {
+          //if the card does NOT MATCH flip back
+          //find the first and second element of the cards i picked
+          $("div.card.cardStack")
+            .find("div#neckob.nekob.flipped")
+            .removeClass("flipped");
           console.log("there was no match return state");
-          gameMoves.first_card_clicked = null;
-          gameMoves.second_card_clicked = null;
-          console.log(
-            gameMoves.first_card_clicked,
-            gameMoves.second_card_clicked
-          );
+
+          // this.setTimeOutfunction();
         }
       }
     }
   }
+
+  // setTimeOutfunction(){
+  //   let first_card = this.game_moves.first_card_element;
+  //   console.log('first_card',first_card);
+  //   $(first_card)
+  //   .find(".neckob.flipped")
+  //   .removeClass("flipped")
+  //   console.log('flip1');
+  //   let second_card = this.game_moves.second_card_element;
+  //   $(second_card)
+  //   .find(".neckob.flipped")
+  //   .removeClass("flipped")
+  //   console.log("flip2");
+  //   this.game_moves.first_card_clicked = null;
+  //   this.game_moves.second_card_clicked = null;
+  //   console.log("there was no match return state");
+  //   console.log(this.game_moves.first_card_clicked,this.game_moves.second_card_clicked);
+  //   2000;
+  // };
+
   createCard() {
     let backImg = ["nekob"];
     let image_Array = this.imageArray;
@@ -192,7 +212,7 @@ class memoryMatch {
       };
       let card_back = {
         info: $("<div>", {
-          id: counter,
+          id: "neckob",
           card: backImg["0"],
           class: backImg["0"]
         })
@@ -200,7 +220,7 @@ class memoryMatch {
       // console.log("card_back", card_back);
       $(".card_img_container").prepend(cardStack.info);
       cardStack.info.append(item.info.clone(), card_back.info.clone());
-      counter++;
+      // counter++;
     });
   }
 
