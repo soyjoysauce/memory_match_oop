@@ -102,10 +102,8 @@ class memoryMatch {
             : console.log("keep going");
         } else {
           //if the card does NOT MATCH flip back
-        //   doWork(callback) {
-        //     setTimeout(() => callback(this.name), 15); 
-        // };
-
+                  
+          (this.flipPause(),1000)
         //instead of async setTimeout establish promize object that will represent 
         //eventual asynch operations. resulting in a value. 
           let gameMoves = this.game_moves;
@@ -120,7 +118,12 @@ class memoryMatch {
 
       }
     }
+    this.setTimeout(function() {
+      console.log('Hello world!');
+    }, 1000);
   }
+
+  
 
   flipPause() {
     let gameMoves = this.game_moves;
