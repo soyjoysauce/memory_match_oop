@@ -132,3 +132,9 @@ div[card="nekob"] {
 .flipped {
   visibility: hidden;
 }
+
+/* #games_played , #accuracy , #attempt {
+  height: 10vh;
+  width:100%;
+
+} */
