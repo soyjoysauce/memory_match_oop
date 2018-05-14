@@ -26,17 +26,23 @@ class eventController {
         )
       );
     });
+    $(".reset").on("click", function() {
+      let container = $(".card_img_container");
+      container.bind(
+        memory_match.__proto__.handleResetClick(container.find("neckob"))
+      );
+    });
   }
 }
 class memoryMatch {
   constructor() {
     this.game_stats = {
-      match_counter: 0,
-      mis_match_counter: 0,
       total_possible_matches: 9,
       attempt: 0,
       accuracy: 0,
-      games_played: 0
+      games_played: 0,
+      match_counter: 0,
+      mis_match_counter: 0
     };
     this.game_moves = {
       first_card_front: null,
@@ -56,6 +62,7 @@ class memoryMatch {
       "bengal_Jack_Sprite",
       "sprite_Joe_DiMeowgio"
     ];
+    this.cards_can_be_clicked = true;
   }
   createCard() {
     let backImg = ["nekob"];
@@ -116,7 +123,7 @@ class memoryMatch {
     randomized_Cards.forEach(function(item) {
       let cardStack = {
         info: $("<div>", {
-          class: "card cardStack"
+          class: "cardStack"
         })
       };
       let card_back = {
@@ -128,7 +135,7 @@ class memoryMatch {
       };
       // console.log("card_back", card_back);
       $(".card_img_container").prepend(cardStack.info);
-      cardStack.info.append(item.info.clone(), card_back.info.clone());
+      cardStack.info.append(item.info, card_back.info).clone();
       // counter++;
     });
   }
@@ -136,155 +143,158 @@ class memoryMatch {
   card_clicked(clickedCard, front, back) {
     let clicked_card = clickedCard;
     let clicked_card_back = clickedCard.childNodes[1];
+    let clicked_card_front = clickedCard.childNodes[0];
     let front_card = front;
     let back_card = back;
-    console.log("front_card", front_card);
-    console.log("back_card", back_card);
 
-    // let cardClicked = $(event.currentTarget);
-    let cards_can_be_clicked = true;
-    let first_card_front = null;
-    let second_card_front = null;
-    let matchCounter = memory_match.game_stats.match_counter;
-    let misMatchCounter = memory_match.game_stats.mis_match_counter;
-    if (cards_can_be_clicked === true) {
+    if (memory_match.cards_can_be_clicked === true) {
       //flips the card over
       $(clicked_card_back).addClass("flipped");
       console.log("flipped");
-      if (memory_match.game_moves.first_card_front === null) {
-        //assign first card attribute
+      //if first and second card is null assign first card to event
+      if (
+        memory_match.game_moves.first_card_front === null &&
+        memory_match.game_moves.second_card_front === null
+      ) {
         memory_match.game_moves.first_card_front = front_card;
         memory_match.game_moves.first_card_back = clicked_card_back;
         console.log("first_card", memory_match.game_moves.first_card_front);
-      } else if (memory_match.game_moves.first_card_front !== null) {
-        //assign second card attribute
+      }
+      //if first card is not empty and second card is assign second card
+      else if (
+        memory_match.game_moves.first_card_front !== null &&
+        memory_match.game_moves.second_card_front === null
+      ) {
         memory_match.game_moves.second_card_front = front_card;
         memory_match.game_moves.second_card_back = clicked_card_back;
         console.log("second_card", memory_match.game_moves.second_card_front);
-        cards_can_be_clicked = false;
+        //card 1 and card 2 MATCHES
         if (
-          memory_match.game_moves.second_card_front ===
-          memory_match.game_moves.first_card_front
+          memory_match.game_moves.first_card_front ===
+          memory_match.game_moves.second_card_front
         ) {
-          //card 1 and card 2 MATCHES
-          cards_can_be_clicked = true;
+          //increment attempt
+          memory_match.game_stats.attempt = memory_match.game_stats.attempt + 1;
+          console.log(
+            "matched and increment attempt: ",
+            memory_match.game_stats.attempt
+          );
+          //increment match counter
+          memory_match.game_stats.match_counter =
+            memory_match.game_stats.match_counter + 1;
+          console.log(
+            "matched and increment match_counter: ",
+            memory_match.game_stats.match_counter
+          );
+          // //assign incremented value to the state
+          // memory_match.game_stats.match_counter = matchCounter;
+          // console.log("a match was made - matchCounter:", matchCounter);
+          // //gameMaxMatch = variable ref pointer for state
+          // let gameMaxMatch = memory_match.game_stats.total_possible_matches;
+          // memory_match.game_stats.total_possible_matches = gameMaxMatch;
+          // console.log("gameMaxMatch:", gameMaxMatch);
+
+          memory_match.display_stats();
+
+          // if matchCounter is same as GameMax you win
+          memory_match.cards_can_be_clicked = true;
+          memory_match.game_stats.match_counter ===
+          memory_match.game_stats.total_possible_matches
+            ? console.log("you won!")
+            : console.log("keep going");
+
           // empty the memory of front
           memory_match.game_moves.first_card_front = null;
           memory_match.game_moves.second_card_front = null;
-          //increment match counter
-          matchCounter = matchCounter + 1;
-          memory_match.display_stats();
-          //assign incremented value to the state
-          memory_match.game_stats.match_counter = matchCounter;
-          console.log("a match was made - matchCounter:", matchCounter);
-          //gameMaxMatch = variable ref pointer for state
-          let gameMaxMatch = memory_match.game_stats.total_possible_matches;
-          memory_match.game_stats.total_possible_matches = gameMaxMatch;
-          console.log("gameMaxMatch:", gameMaxMatch);
-          // if matchCounter is same as GameMax you win
-          matchCounter === gameMaxMatch
-            ? console.log("you won!")
-            : console.log("keep going");
-        } else {
-          //card 1 and card 2 DOES NOT MATCH flip back
-          memory_match.flipPause();
+          memory_match.game_moves.first_card_back = null;
+          memory_match.game_moves.second_card_back = null;
+        }
+        //card 1 and card 2 DOES NOT MATCH flip back
+        else {
+          memory_match.cards_can_be_clicked = false;
+          //increment attempt
+          memory_match.game_stats.attempt = memory_match.game_stats.attempt + 1;
+          console.log(
+            "matched and increment attempt: ",
+            memory_match.game_stats.attempt
+          );
+          // memory_match.flipPause();
+          setTimeout(function() {
+            $(memory_match.game_moves.first_card_back).removeClass("flipped");
+            $(memory_match.game_moves.second_card_back).removeClass("flipped");
+            memory_match.cards_can_be_clicked = true;
+            // empty the memory of front
+            memory_match.game_moves.first_card_front = null;
+            memory_match.game_moves.second_card_front = null;
+            memory_match.game_moves.first_card_back = null;
+            memory_match.game_moves.second_card_back = null;
+          }, 3000);
           // increment mis-match counter
-          misMatchCounter = misMatchCounter + 1;
+          memory_match.game_stats.mis_match_counter =
+            memory_match.game_stats.mis_match_counter + 1;
           memory_match.display_stats();
-
         }
       }
     }
   }
 
-  flipPause() {
-    memory_match.game_moves.first_card_front = null;
-    memory_match.game_moves.second_card_front = null;
-    memory_match.game_moves.first_card_back = null;
-    memory_match.game_moves.second_card_back = null;
-    console.log("there was no match return state");
-
-    console.log(
-      memory_match.game_moves.first_card_front,
-      memory_match.game_moves.second_card_front
-    );
-    setTimeout(
-      $(memory_match.game_moves.first_card_back).removeClass("flipped"),
-      10000
-    );
-    setTimeout(
-      $(memory_match.game_moves.second_card_back).removeClass("flipped"),
-      10000
-    );
-  }
-
   display_stats() {
-    // console.log("match", match);
-    // console.log("miss", miss);
-
-    let gameAttempt = memory_match.game_stats.attempt;
     let gameAccuracy = memory_match.game_stats.accuracy;
-    let gamesPlayed = memory_match.game_stats.games_played;
-    let matchCounter = memory_match.game_stats.match_counter + match;
-    let misMatchCounter = memory_match.game_stats.mis_match_counter + miss;
-    console.log("gameAttempt", memory_match.game_stats.attempt);
-    console.log("gameAccuracy", memory_match.game_stats.accuracy);
-    console.log("gamesPlayed", memory_match.game_stats.games_played);
-    console.log("matchCounter", memory_match.game_stats.match_counter);
-
-    $("#games_played").text(gamesPlayed);
-    $("#attempt").text(gameAttempt);
     gameAccuracy =
-      Math.floor((matchCounter - misMatchCounter) / gameAttempt * 100) + "%";
-    console.log("gameAccuracy", gameAccuracy);
+      Math.floor(
+        (memory_match.game_stats.match_counter -
+          memory_match.game_stats.mis_match_counter) /
+          memory_match.game_stats.total_possible_matches *
+          100
+      ) + "%";
+
+    $("#games_played").text(memory_match.game_stats.games_played);
+    $("#attempt").text(memory_match.game_stats.attempt);
     $("#accuracy").text(gameAccuracy);
+
+    console.log("gameAccuracy", gameAccuracy);
+    console.log("displaying gameAttempt :", memory_match.game_stats.attempt);
+    console.log("displaying gameAccuracy :", memory_match.game_stats.accuracy);
+    console.log(
+      "displaying gamesPlayed :",
+      memory_match.game_stats.games_played
+    );
+    console.log(
+      "displaying matchCounter :",
+      memory_match.game_stats.match_counter
+    );
   }
 
   handleResetClick() {
     console.log("reset clicked");
-    $(".card")
-      .find(".back")
-      .removeClass("flipped");
-    games_played++;
-    display_stats();
-    reset_stats();
-    stackShuffle();
+    let cardContainer = $(".card_img_container").find(".cardStack");
+    let cardStack = $(cardContainer).find("#neckob");
+    $(cardContainer).each(function(index) {
+      let item = cardStack.prevObject[index].childNodes[1];
+      $(item).removeClass("flipped");
+    });
+    memory_match.display_stats(memory_match.reset_stats());
+    //make a fucntion that will randomize the array again
+    // memory_match.stackShuffle();
   }
 
   reset_stats() {
-    accuracy = 0;
-    match_counter = 0;
-    attempts = 0;
+    memory_match.game_stats.attempt = 0;
+    memory_match.game_stats.accuracy = 0;
+    memory_match.game_stats.match_counter = 0;
+    memory_match.game_stats.games_played = 0;
+    console.log("gameAttempt reset : ", memory_match.game_stats.attempt);
+    console.log("gameAccuracy reset : ", memory_match.game_stats.accuracy);
+    console.log("gamesPlayed reset : ", memory_match.game_stats.games_played);
+    console.log("matchCounter reset :", memory_match.game_stats.match_counter);
   }
 }
 
 var memory_match = null;
 var event_controller = null;
 
-//this one accesses the image inside the cardStack div.
-// let card_user_front = $(cardClicked)
-//   .find("#front")
-//   .attr("card");
-// console.log("card_user_front:", card_user_front);
 
-//this one accesses the back image inside the cardStack div.
-// let card_user_back = $(cardClicked)
-//   .find("#nekob")
-//   .attr("card");
-// console.log("card_user_back:", card_user_back);
-
-//this one is access to the back of the card -> 'nekob'
-// const user_input = event.target;
-// console.log("user_input:", user_input);
-
-//instead of async setTimeout establish promise object that will represent
-//eventual asynch operations. resulting in a value.
-// let gameMoves = this.game_moves;
-// $(gameMoves.first_card_back).removeClass("flipped");
-// $(gameMoves.second_card_back).removeClass("flipped");
-// gameMoves.first_card_front = null;
-// gameMoves.second_card_front = null;
-
-// console.log('clickedCard',clickedCard.childNodes[1]);
-// console.log("front", front);
-// console.log("back", back);
+    // let matchCounter = memory_match.game_stats.match_counter;
+    // let misMatchCounter = memory_match.game_stats.mis_match_counter;
+    // let gameAttempt = memory_match.game_stats.attempt;
+    // let cardsCanBeClicked = ;
