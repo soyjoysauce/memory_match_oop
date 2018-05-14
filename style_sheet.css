@@ -33,10 +33,10 @@ h3 {
 }
 
 div.card_img_container {
-  width: 85vw;
-  margin: 0%;
-  height: 90vh;
-  border: 1px solid black;
+  width: 100%;
+    margin: 0%;
+    height: 70vh;
+    border: 1px solid black;
 }
 
 div[card="sapphire_Sprite"] {
@@ -132,3 +132,9 @@ div[card="nekob"] {
 .flipped {
   visibility: hidden;
 }
+
+/* #games_played , #accuracy , #attempt {
+  height: 10vh;
+  width:100%;
+
+} */
