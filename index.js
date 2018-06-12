@@ -144,11 +144,17 @@ class memoryMatch {
     let clicked_card = clickedCard;
     let clicked_card_back = clickedCard.childNodes[1];
     let clicked_card_front = clickedCard.childNodes[0];
+    let back_class = (clicked_card_back.className).toString() ;
+    let catString = "nekob";
     let front_card = front;
     let back_card = back;
-
-    if (memory_match.cards_can_be_clicked === true) {
-      //flips the card over
+    // if the card is same as the last one return
+    if (memory_match.game_moves.first_card_back === clicked_card_back) {
+      console.log("they be the same");
+      return;
+    }
+    //if you can flip cards and its not one that has already been flipped
+    if (memory_match.cards_can_be_clicked === true && back_class === catString) {
       $(clicked_card_back).addClass("flipped");
       console.log("flipped");
       //if first and second card is null assign first card to event
@@ -186,14 +192,6 @@ class memoryMatch {
             "matched and increment match_counter: ",
             memory_match.game_stats.match_counter
           );
-          // //assign incremented value to the state
-          // memory_match.game_stats.match_counter = matchCounter;
-          // console.log("a match was made - matchCounter:", matchCounter);
-          // //gameMaxMatch = variable ref pointer for state
-          // let gameMaxMatch = memory_match.game_stats.total_possible_matches;
-          // memory_match.game_stats.total_possible_matches = gameMaxMatch;
-          // console.log("gameMaxMatch:", gameMaxMatch);
-
           memory_match.display_stats();
 
           // if matchCounter is same as GameMax you win
@@ -293,8 +291,3 @@ class memoryMatch {
 var memory_match = null;
 var event_controller = null;
 
-
-    // let matchCounter = memory_match.game_stats.match_counter;
-    // let misMatchCounter = memory_match.game_stats.mis_match_counter;
-    // let gameAttempt = memory_match.game_stats.attempt;
-    // let cardsCanBeClicked = ;
